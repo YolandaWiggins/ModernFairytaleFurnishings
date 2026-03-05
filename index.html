@@ -7,182 +7,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:#f4f6f8;
-color:#333;
-}
-
-header{
-background:white;
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
-position:sticky;
-top:0;
-z-index:10;
-}
-
-.logo{
-font-size:24px;
-font-weight:600;
-color:#5a4bff;
-}
-
-nav a{
-margin:0 15px;
-text-decoration:none;
-color:#333;
-font-weight:500;
-}
-
-.hero{
-height:520px;
-background:url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0') center/cover;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-padding:20px;
-}
-
-.hero h1{
-font-size:56px;
-margin:0;
-text-shadow:0 5px 20px rgba(0,0,0,0.4);
-}
-
-.hero p{
-font-size:20px;
-margin:15px 0 25px;
-}
-
-.hero button{
-padding:14px 28px;
-border:none;
-background:#5a4bff;
-color:white;
-font-size:16px;
-border-radius:8px;
-cursor:pointer;
-}
-
-.section{
-padding:70px 40px;
-max-width:1200px;
-margin:auto;
-}
-
-.section h2{
-text-align:center;
-margin-bottom:40px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:25px;
-}
-
-.card{
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-transition:transform .2s;
-}
-
+body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6f8;color:#333}
+header{background:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);position:sticky;top:0;z-index:10}
+.logo{font-size:24px;font-weight:600;color:#5a4bff}
+nav a{margin:0 15px;text-decoration:none;color:#333;font-weight:500}
+.hero{height:520px;background:url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0') center/cover;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:20px}
+.hero h1{font-size:56px;margin:0;text-shadow:0 5px 20px rgba(0,0,0,0.4)}
+.hero p{font-size:20px;margin:15px 0 25px}
+.hero button{padding:14px 28px;border:none;background:#5a4bff;color:white;font-size:16px;border-radius:8px;cursor:pointer}
+.section{padding:70px 40px;max-width:1200px;margin:auto}
+.section h2{text-align:center;margin-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.08);transition:transform .2s}
 .card:hover{transform:translateY(-5px)}
-
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.card-body{
-padding:20px;
-}
-
-.card-body h3{
-margin-top:0;
-}
-
-.card-body button{
-margin-top:10px;
-padding:10px 16px;
-border:none;
-background:#5a4bff;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
-
-.plans{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
-
-.plan{
-background:white;
-padding:30px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-text-align:center;
-}
-
-.plan.popular{
-border:3px solid #5a4bff;
-transform:scale(1.05);
-}
-
-.price{
-font-size:36px;
-margin:15px 0;
-color:#5a4bff;
-}
-
-.plan ul{
-list-style:none;
-padding:0;
-}
-
-.plan li{
-padding:6px 0;
-}
-
-.plan button{
-margin-top:15px;
-padding:12px 20px;
-border:none;
-background:#5a4bff;
-color:white;
-border-radius:6px;
-cursor:pointer;
-}
-
-.cta{
-background:#5a4bff;
-color:white;
-padding:60px 20px;
-text-align:center;
-}
-
-.cta h2{margin-top:0}
-
-footer{
-background:#111;
-color:white;
-padding:40px 20px;
-text-align:center;
-margin-top:40px;
-}
+.card img{width:100%;height:180px;object-fit:cover}
+.card-body{padding:20px}
+.card-body h3{margin-top:0}
+.card-body button{margin-top:10px;padding:10px 16px;border:none;background:#5a4bff;color:white;border-radius:6px;cursor:pointer}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+.plan{background:white;padding:30px;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.08);text-align:center}
+.plan.popular{border:3px solid #5a4bff;transform:scale(1.05)}
+.price{font-size:36px;margin:15px 0;color:#5a4bff}
+.plan ul{list-style:none;padding:0}
+.plan li{padding:6px 0}
+.plan button{margin-top:15px;padding:12px 20px;border:none;background:#5a4bff;color:white;border-radius:6px;cursor:pointer}
+.products{display:none}
+.back{margin-bottom:20px;background:#5a4bff;color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer}
+footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-top:40px}
 </style>
 </head>
 
@@ -191,22 +42,20 @@ margin-top:40px;
 <header>
 <div class="logo">Modern Fairytale Furnishings</div>
 <nav>
-<a href="#">Home</a>
+<a href="#" onclick="showHome()">Home</a>
 <a href="#collections">Collections</a>
 <a href="#protection">Protection Plans</a>
-<a href="#contact">Contact</a>
 </nav>
 </header>
 
-<section class="hero">
+<section class="hero" id="homeHero">
 <h1>Design Your Dream Home</h1>
 <p>Luxury furnishings for every room of your story.</p>
-<button>Browse Collections</button>
+<button onclick="scrollToCollections()">Browse Collections</button>
 </section>
 
 <section class="section" id="collections">
 <h2>Shop By Room</h2>
-
 <div class="grid">
 
 <div class="card">
@@ -214,7 +63,7 @@ margin-top:40px;
 <div class="card-body">
 <h3>Bedroom</h3>
 <p>Beds, dressers, nightstands and luxury sets.</p>
-<button>Browse Bedroom</button>
+<button onclick="showCategory('bedroom')">Browse Bedroom</button>
 </div>
 </div>
 
@@ -223,7 +72,7 @@ margin-top:40px;
 <div class="card-body">
 <h3>Living Room</h3>
 <p>Sofas, sectionals, recliners and tables.</p>
-<button>Browse Living Room</button>
+<button onclick="showCategory('living')">Browse Living Room</button>
 </div>
 </div>
 
@@ -232,7 +81,7 @@ margin-top:40px;
 <div class="card-body">
 <h3>Dining Room</h3>
 <p>Dining sets, chairs and elegant tables.</p>
-<button>Browse Dining</button>
+<button onclick="showCategory('dining')">Browse Dining</button>
 </div>
 </div>
 
@@ -241,16 +90,21 @@ margin-top:40px;
 <div class="card-body">
 <h3>Home Theater</h3>
 <p>Luxury recliners and media consoles.</p>
-<button>Browse Theater</button>
+<button onclick="showCategory('theater')">Browse Theater</button>
 </div>
 </div>
 
 </div>
 </section>
 
+<section class="section products" id="productSection">
+<button class="back" onclick="showHome()">← Back to Collections</button>
+<h2 id="categoryTitle"></h2>
+<div class="grid" id="productGrid"></div>
+</section>
+
 <section class="section" id="protection">
 <h2>Furniture Protection Plans</h2>
-
 <div class="plans">
 
 <div class="plan">
@@ -293,17 +147,78 @@ margin-top:40px;
 </div>
 </section>
 
-<section class="cta">
-<h2>Turn Your House Into a Fairytale Home</h2>
-<p>Explore our collections and protect your investment with our furniture coverage plans.</p>
-</section>
-
-<footer id="contact">
+<footer>
 <p>Modern Fairytale Furnishings</p>
 <p>Email: support@modernfairytalefurnishings.com</p>
-<p>Phone: (800) 555‑FURN</p>
+<p>Phone: (800) 555-FURN</p>
 <p>© 2026 Modern Fairytale Furnishings</p>
 </footer>
+
+<script>
+const products={
+
+bedroom:[
+{name:'Luxury King Bed',price:'$1299',img:'https://images.unsplash.com/photo-1505693314120-0d443867891c'},
+{name:'Modern Nightstand',price:'$199',img:'https://images.unsplash.com/photo-1560185127-6ed189bf02f4'},
+{name:'Wood Dresser',price:'$599',img:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0'}
+],
+
+living:[
+{name:'Leather Sofa',price:'$999',img:'https://images.unsplash.com/photo-1615529328331-f8917597711f'},
+{name:'Recliner Chair',price:'$499',img:'https://images.unsplash.com/photo-1598300053653-63d9c8a9e9a0'},
+{name:'Coffee Table',price:'$249',img:'https://images.unsplash.com/photo-1493666438817-866a91353ca9'}
+],
+
+dining:[
+{name:'Dining Table Set',price:'$899',img:'https://images.unsplash.com/photo-1600210492493-0946911123ea'},
+{name:'Dining Chairs',price:'$299',img:'https://images.unsplash.com/photo-1505691938895-1758d7feb511'},
+{name:'Buffet Cabinet',price:'$699',img:'https://images.unsplash.com/photo-1616627781431-23b776aad449'}
+],
+
+theater:[
+{name:'Power Recliner',price:'$799',img:'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf'},
+{name:'Theater Seating Row',price:'$1999',img:'https://images.unsplash.com/photo-1598300053653-63d9c8a9e9a0'},
+{name:'Media Console',price:'$499',img:'https://images.unsplash.com/photo-1582582429416-9f33f3c7d2e3'}
+]
+}
+
+function showCategory(category){
+const grid=document.getElementById('productGrid')
+const section=document.getElementById('productSection')
+const title=document.getElementById('categoryTitle')
+
+grid.innerHTML=''
+
+products[category].forEach(p=>{
+const card=`
+<div class="card">
+<img src="${p.img}">
+<div class="card-body">
+<h3>${p.name}</h3>
+<p>${p.price}</p>
+<button>Add to Cart</button>
+</div>
+</div>`
+
+grid.innerHTML+=card
+})
+
+title.innerText=category.charAt(0).toUpperCase()+category.slice(1)+' Furniture'
+section.style.display='block'
+document.getElementById('collections').style.display='none'
+document.getElementById('homeHero').style.display='none'
+}
+
+function showHome(){
+document.getElementById('productSection').style.display='none'
+document.getElementById('collections').style.display='block'
+document.getElementById('homeHero').style.display='flex'
+}
+
+function scrollToCollections(){
+document.getElementById('collections').scrollIntoView({behavior:'smooth'})
+}
+</script>
 
 </body>
 </html>
