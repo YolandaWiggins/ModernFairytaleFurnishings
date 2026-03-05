@@ -9,7 +9,7 @@ body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#333}
 header{background:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);position:sticky;top:0;z-index:10}
 .logo{font-size:24px;font-weight:bold;color:#5a4bff}
 nav a{margin:0 15px;text-decoration:none;color:#333;font-weight:500;cursor:pointer}
-.hero{height:500px;background:url('https://via.placeholder.com/1200x500?text=Modern+Fairytale+Furnishings') center/cover;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:20px}
+.hero{height:500px;background:url('https://images.unsplash.com/photo-1616627781431-23b776aad449?auto=format&fit=crop&w=1200&q=80') center/cover;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:20px}
 .hero h1{font-size:56px;margin:0;text-shadow:0 5px 20px rgba(0,0,0,0.4)}
 .hero p{font-size:20px;margin:15px 0 25px}
 .hero button{padding:14px 28px;border:none;background:#5a4bff;color:white;font-size:16px;border-radius:8px;cursor:pointer}
@@ -44,10 +44,10 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 <section class="section" id="collections">
 <h2>Shop By Room</h2>
 <div class="grid">
-<div class="card"><img src="https://via.placeholder.com/800x180?text=Bedroom"><div class="card-body"><h3>Bedroom</h3><p>Beds, dressers, nightstands and luxury sets.</p><button onclick="showCategory('bedroom')">Browse Bedroom</button></div></div>
-<div class="card"><img src="https://via.placeholder.com/800x180?text=Living+Room"><div class="card-body"><h3>Living Room</h3><p>Sofas, sectionals, recliners and tables.</p><button onclick="showCategory('living')">Browse Living Room</button></div></div>
-<div class="card"><img src="https://via.placeholder.com/800x180?text=Dining+Room"><div class="card-body"><h3>Dining Room</h3><p>Dining sets, chairs and elegant tables.</p><button onclick="showCategory('dining')">Browse Dining</button></div></div>
-<div class="card"><img src="https://via.placeholder.com/800x180?text=Home+Theater"><div class="card-body"><h3>Home Theater</h3><p>Luxury recliners and media consoles.</p><button onclick="showCategory('theater')">Browse Theater</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1616627781431-23b776aad449?auto=format&fit=crop&w=800&q=80"><div class="card-body"><h3>Bedroom</h3><p>Beds, dressers, nightstands and luxury sets.</p><button onclick="showCategory('bedroom')">Browse Bedroom</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&w=800&q=80"><div class="card-body"><h3>Living Room</h3><p>Sofas, sectionals, recliners and tables.</p><button onclick="showCategory('living')">Browse Living Room</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80"><div class="card-body"><h3>Dining Room</h3><p>Dining sets, chairs and elegant tables.</p><button onclick="showCategory('dining')">Browse Dining</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80"><div class="card-body"><h3>Home Theater</h3><p>Luxury recliners and media consoles.</p><button onclick="showCategory('theater')">Browse Theater</button></div></div>
 </div>
 </section>
 <section class="section products" id="productSection">
@@ -72,13 +72,55 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 <script>
 const products={
   bedroom:[
-    {name:'Luxury King Bed', price:'$1299', img:'https://via.placeholder.com/800x180?text=Luxury+King+Bed'},
-    {name:'Modern Nightstand', price:'$199', img:'https://via.placeholder.com/800x180?text=Nightstand'},
-    {name:'Wood Dresser', price:'$599', img:'https://via.placeholder.com/800x180?text=Dresser'}
+    {name:'Luxury King Bed', price:'$1299', img:'bed186025_main.jpg'},
+    {name:'Modern Nightstand', price:'$199', img:'https://images.unsplash.com/photo-1589872332562-31a46b4bb2b5?auto=format&fit=crop&w=800&q=80'},
+    {name:'Wood Dresser', price:'$599', img:'https://images.unsplash.com/photo-1600185360838-3d97f6b15c18?auto=format&fit=crop&w=800&q=80'}
   ],
   living:[
-    {name:'Leather Sofa', price:'$999', img:'https://via.placeholder.com/800x180?text=Leather+Sofa'},
-    {name:'Recliner Chair', price:'$499', img:'https://via.placeholder.com/800x180?text=Recliner+Chair'},
-    {name:'Coffee Table', price:'$249', img:'https://via.placeholder.com/800x180?text=Coffee+Table'}
+    {name:'Leather Sofa', price:'$999', img:'https://images.unsplash.com/photo-1615529328331-f8917597711f?auto=format&fit=crop&w=800&q=80'},
+    {name:'Recliner Chair', price:'$499', img:'https://images.unsplash.com/photo-1598300053653-63d9c8a9e9a0?auto=format&fit=crop&w=800&q=80'},
+    {name:'Coffee Table', price:'$249', img:'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=800&q=80'}
   ],
-  dini
+  dining:[
+    {name:'Dining Table Set', price:'$899', img:'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80'},
+    {name:'Dining Chairs', price:'$299', img:'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80'},
+    {name:'Buffet Cabinet', price:'$699', img:'https://images.unsplash.com/photo-1616627781431-23b776aad449?auto=format&fit=crop&w=800&q=80'}
+  ],
+  theater:[
+    {name:'Power Recliner', price:'$799', img:'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80'},
+    {name:'Theater Seating Row', price:'$1999', img:'https://images.unsplash.com/photo-1598300053653-63d9c8a9e9a0?auto=format&fit=crop&w=800&q=80'},
+    {name:'Media Console', price:'$499', img:'https://images.unsplash.com/photo-1582582429416-9f33f3c7d2e3?auto=format&fit=crop&w=800&q=80'}
+  ]
+};
+
+function showCategory(cat){
+  const grid=document.getElementById('productGrid');
+  grid.innerHTML='';
+  products[cat].forEach(p=>{
+    const div=document.createElement('div');
+    div.className='card';
+    div.innerHTML=`<img src='${p.img}'><div class='card-body'><h3>${p.name}</h3><p>${p.price}</p><button>Add to Cart</button></div>`;
+    grid.appendChild(div);
+  });
+  document.getElementById('categoryTitle').innerText=cat.charAt(0).toUpperCase()+cat.slice(1)+' Furniture';
+  document.getElementById('productSection').style.display='block';
+  document.getElementById('collections').style.display='none';
+  document.getElementById('homeHero').style.display='none';
+}
+
+function showHome(){
+  document.getElementById('productSection').style.display='none';
+  document.getElementById('collections').style.display='block';
+  document.getElementById('homeHero').style.display='flex';
+}
+
+function scrollToCollections(){
+  document.getElementById('collections').scrollIntoView({behavior:'smooth'});
+}
+
+function scrollToInsurance(){
+  document.getElementById('protection').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
