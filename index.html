@@ -1,224 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modern Fairytale Furnishings</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:'Poppins',sans-serif;background:#f4f6f8;color:#333}
-header{background:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);position:sticky;top:0;z-index:10}
-.logo{font-size:24px;font-weight:600;color:#5a4bff}
-nav a{margin:0 15px;text-decoration:none;color:#333;font-weight:500}
-.hero{height:520px;background:url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0') center/cover;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:20px}
-.hero h1{font-size:56px;margin:0;text-shadow:0 5px 20px rgba(0,0,0,0.4)}
-.hero p{font-size:20px;margin:15px 0 25px}
-.hero button{padding:14px 28px;border:none;background:#5a4bff;color:white;font-size:16px;border-radius:8px;cursor:pointer}
-.section{padding:70px 40px;max-width:1200px;margin:auto}
-.section h2{text-align:center;margin-bottom:40px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px}
-.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.08);transition:transform .2s}
-.card:hover{transform:translateY(-5px)}
-.card img{width:100%;height:180px;object-fit:cover}
-.card-body{padding:20px}
-.card-body h3{margin-top:0}
-.card-body button{margin-top:10px;padding:10px 16px;border:none;background:#5a4bff;color:white;border-radius:6px;cursor:pointer}
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
-.plan{background:white;padding:30px;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.08);text-align:center}
-.plan.popular{border:3px solid #5a4bff;transform:scale(1.05)}
-.price{font-size:36px;margin:15px 0;color:#5a4bff}
-.plan ul{list-style:none;padding:0}
-.plan li{padding:6px 0}
-.plan button{margin-top:15px;padding:12px 20px;border:none;background:#5a4bff;color:white;border-radius:6px;cursor:pointer}
-.products{display:none}
-.back{margin-bottom:20px;background:#5a4bff;color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer}
-footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-top:40px}
-</style>
-</head>
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-<body>
+const furnitureData = {
+  bedroom: [
+    { name: "DreamCloud King Bed", price: 1299 },
+    { name: "Modern Nightstand", price: 199 },
+    { name: "Luxury Dresser", price: 799 }
+  ],
+  living: [
+    { name: "Cloud Comfort Sofa", price: 1499 },
+    { name: "Reclining Loveseat", price: 999 },
+    { name: "Accent Coffee Table", price: 299 }
+  ],
+  dining: [
+    { name: "Elegant Dining Table", price: 1199 },
+    { name: "Modern Dining Chairs (Set of 4)", price: 499 }
+  ],
+  theater: [
+    { name: "Power Reclining Theater Seats", price: 1899 },
+    { name: "LED Console Table", price: 399 }
+  ]
+};
 
-<header>
-<div class="logo">Modern Fairytale Furnishings</div>
-<nav>
-<a href="#" onclick="showHome()">Home</a>
-<a href="#collections">Collections</a>
-<a href="#protection">Protection Plans</a>
-</nav>
-</header>
+const plans = [
+  {
+    name: "Good",
+    description: "Covers wear & tear and broken parts",
+    percent: 0.08
+  },
+  {
+    name: "Better",
+    description: "Includes mechanical part coverage",
+    percent: 0.12
+  },
+  {
+    name: "Best",
+    description: "Includes electrical components for power recliners",
+    percent: 0.16
+  }
+];
 
-<section class="hero" id="homeHero">
-<h1>Design Your Dream Home</h1>
-<p>Luxury furnishings for every room of your story.</p>
-<button onclick="scrollToCollections()">Browse Collections</button>
-</section>
+export default function ModernFairytaleFurnishings() {
+  const [category, setCategory] = useState(null);
+  const [cart, setCart] = useState([]);
 
-<section class="section" id="collections">
-<h2>Shop By Room</h2>
-<div class="grid">
+  function addToCart(item) {
+    setCart([...cart, { ...item, plan: null }]);
+  }
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505693314120-0d443867891c">
-<div class="card-body">
-<h3>Bedroom</h3>
-<p>Beds, dressers, nightstands and luxury sets.</p>
-<button onclick="showCategory('bedroom')">Browse Bedroom</button>
-</div>
-</div>
+  function addPlan(index, plan) {
+    const updated = [...cart];
+    updated[index].plan = plan;
+    setCart(updated);
+  }
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1615529328331-f8917597711f">
-<div class="card-body">
-<h3>Living Room</h3>
-<p>Sofas, sectionals, recliners and tables.</p>
-<button onclick="showCategory('living')">Browse Living Room</button>
-</div>
-</div>
+  const total = cart.reduce((sum, item) => {
+    const planCost = item.plan ? item.price * item.plan.percent : 0;
+    return sum + item.price + planCost;
+  }, 0);
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1600210492493-0946911123ea">
-<div class="card-body">
-<h3>Dining Room</h3>
-<p>Dining sets, chairs and elegant tables.</p>
-<button onclick="showCategory('dining')">Browse Dining</button>
-</div>
-</div>
+  return (
+    <div className="min-h-screen bg-gray-50">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf">
-<div class="card-body">
-<h3>Home Theater</h3>
-<p>Luxury recliners and media consoles.</p>
-<button onclick="showCategory('theater')">Browse Theater</button>
-</div>
-</div>
+      {/* Header */}
+      <div className="bg-black text-white p-6 text-center">
+        <h1 className="text-4xl font-bold">Modern Fairytale Furnishings</h1>
+        <p className="text-gray-300">Luxury Furniture + Protection Plans</p>
+      </div>
 
-</div>
-</section>
+      {/* Category Navigation */}
+      <div className="flex justify-center gap-4 p-6 flex-wrap">
+        {Object.keys(furnitureData).map((cat) => (
+          <Button key={cat} onClick={() => setCategory(cat)}>
+            {cat.toUpperCase()}
+          </Button>
+        ))}
+      </div>
 
-<section class="section products" id="productSection">
-<button class="back" onclick="showHome()">← Back to Collections</button>
-<h2 id="categoryTitle"></h2>
-<div class="grid" id="productGrid"></div>
-</section>
+      {/* Products */}
+      {category && (
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto p-6">
+          {furnitureData[category].map((item) => (
+            <Card key={item.name} className="rounded-2xl shadow">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold">{item.name}</h3>
+                <p className="text-lg mt-2">${item.price}</p>
+                <Button className="mt-4" onClick={() => addToCart(item)}>
+                  Add to Cart
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
 
-<section class="section" id="protection">
-<h2>Furniture Protection Plans</h2>
-<div class="plans">
+      {/* Insurance Plans */}
+      <div className="bg-white py-16">
+        <h2 className="text-3xl font-bold text-center mb-10">Furniture Protection Plans</h2>
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-6">
+          {plans.map((plan) => (
+            <Card key={plan.name} className="rounded-2xl shadow">
+              <CardContent className="p-6 text-center">
+                <h3 className="text-2xl font-bold">{plan.name}</h3>
+                <p className="mt-4">{plan.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
 
-<div class="plan">
-<h3>GOOD</h3>
-<div class="price">$79</div>
-<ul>
-<li>Wear & Tear</li>
-<li>Broken Frames</li>
-<li>Spring Damage</li>
-<li>Structural Repairs</li>
-</ul>
-<button>Add Protection</button>
-</div>
+      {/* Cart */}
+      <div className="bg-gray-100 py-16">
+        <h2 className="text-3xl font-bold text-center mb-10">Shopping Cart</h2>
+        <div className="max-w-4xl mx-auto space-y-6 px-6">
 
-<div class="plan popular">
-<h3>BETTER</h3>
-<div class="price">$109</div>
-<ul>
-<li>Everything in GOOD</li>
-<li>Reclining Mechanisms</li>
-<li>Manual Handles</li>
-<li>Mechanical Failures</li>
-</ul>
-<button>Add Protection</button>
-</div>
+          {cart.map((item, index) => (
+            <Card key={index}>
+              <CardContent className="p-6">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="font-bold">{item.name}</h3>
+                    <p>${item.price}</p>
+                  </div>
 
-<div class="plan">
-<h3>BEST</h3>
-<div class="price">$149</div>
-<ul>
-<li>Everything in BETTER</li>
-<li>Power Recliner Motors</li>
-<li>Electrical Components</li>
-<li>Control Panels</li>
-<li>Priority Service</li>
-</ul>
-<button>Add Protection</button>
-</div>
+                  <div className="flex gap-2">
+                    {plans.map((plan) => (
+                      <Button
+                        key={plan.name}
+                        onClick={() => addPlan(index, plan)}
+                        variant={item.plan?.name === plan.name ? "default" : "outline"}
+                      >
+                        {plan.name}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
 
-</div>
-</section>
+          {cart.length > 0 && (
+            <div className="text-center">
+              <h3 className="text-2xl font-bold">Total: ${total.toFixed(2)}</h3>
+              <Button className="mt-4">Proceed to Checkout</Button>
+            </div>
+          )}
+        </div>
+      </div>
 
-<footer>
-<p>Modern Fairytale Furnishings</p>
-<p>Email: support@modernfairytalefurnishings.com</p>
-<p>Phone: (800) 555-FURN</p>
-<p>© 2026 Modern Fairytale Furnishings</p>
-</footer>
+      {/* Mailing List */}
+      <div className="bg-white py-16">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">Join Our Mailing List</h2>
+          <p className="mb-8 text-gray-600">
+            Get deals, new arrivals, and protection plan promotions.
+          </p>
 
-<script>
-const products={
+          <form className="grid gap-4">
+            <input placeholder="Full Name" className="p-3 border rounded-xl" />
+            <input placeholder="Address" className="p-3 border rounded-xl" />
+            <input placeholder="Email" className="p-3 border rounded-xl" />
+            <Button>Subscribe</Button>
+          </form>
+        </div>
+      </div>
 
-bedroom:[
-{name:'Luxury King Bed',price:'$1299',img:'https://images.unsplash.com/photo-1505693314120-0d443867891c'},
-{name:'Modern Nightstand',price:'$199',img:'https://images.unsplash.com/photo-1560185127-6ed189bf02f4'},
-{name:'Wood Dresser',price:'$599',img:'https://images.unsplash.com/photo-1616594039964-ae9021a400a0'}
-],
-
-living:[
-{name:'Leather Sofa',price:'$999',img:'https://images.unsplash.com/photo-1615529328331-f8917597711f'},
-{name:'Recliner Chair',price:'$499',img:'https://images.unsplash.com/photo-1598300053653-63d9c8a9e9a0'},
-{name:'Coffee Table',price:'$249',img:'https://images.unsplash.com/photo-1493666438817-866a91353ca9'}
-],
-
-dining:[
-{name:'Dining Table Set',price:'$899',img:'https://images.unsplash.com/photo-1600210492493-0946911123ea'},
-{name:'Dining Chairs',price:'$299',img:'https://images.unsplash.com/photo-1505691938895-1758d7feb511'},
-{name:'Buffet Cabinet',price:'$699',img:'https://images.unsplash.com/photo-1616627781431-23b776aad449'}
-],
-
-theater:[
-{name:'Power Recliner',price:'$799',img:'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf'},
-{name:'Theater Seating Row',price:'$1999',img:'https://images.unsplash.com/photo-1598300053653-63d9c8a9e9a0'},
-{name:'Media Console',price:'$499',img:'https://images.unsplash.com/photo-1582582429416-9f33f3c7d2e3'}
-]
+      <footer className="bg-black text-white text-center p-6">
+        © 2026 Modern Fairytale Furnishings
+      </footer>
+    </div>
+  );
 }
-
-function showCategory(category){
-const grid=document.getElementById('productGrid')
-const section=document.getElementById('productSection')
-const title=document.getElementById('categoryTitle')
-
-grid.innerHTML=''
-
-products[category].forEach(p=>{
-const card=`
-<div class="card">
-<img src="${p.img}">
-<div class="card-body">
-<h3>${p.name}</h3>
-<p>${p.price}</p>
-<button>Add to Cart</button>
-</div>
-</div>`
-
-grid.innerHTML+=card
-})
-
-title.innerText=category.charAt(0).toUpperCase()+category.slice(1)+' Furniture'
-section.style.display='block'
-document.getElementById('collections').style.display='none'
-document.getElementById('homeHero').style.display='none'
-}
-
-function showHome(){
-document.getElementById('productSection').style.display='none'
-document.getElementById('collections').style.display='block'
-document.getElementById('homeHero').style.display='flex'
-}
-
-function scrollToCollections(){
-document.getElementById('collections').scrollIntoView({behavior:'smooth'})
-}
-</script>
-
-</body>
-</html>
