@@ -6,7 +6,7 @@
 <title>Modern Fairytale Furnishings</title>
 <style>
 /* General Styles */
-body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#333}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#333;}
 
 /* Header */
 header{background:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);position:sticky;top:0;z-index:10}
@@ -43,7 +43,7 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 
 /* Mailing List Popup */
 .signup-popup {
-  display: none; /* hidden by default */
+  display: none;
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -51,6 +51,12 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
   justify-content: center;
   align-items: center;
   z-index: 999;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.signup-popup.show {
+  display: flex;
+  opacity: 1;
 }
 
 .signup-box {
@@ -88,19 +94,10 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
   cursor: pointer;
 }
 
-.signup-box button:hover {
-  background: #4739e6;
-}
+.signup-box button:hover { background: #4739e6; }
+.close { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 18px; }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-/* Floating button */
+/* Floating buttons */
 #mailingListBtn {
   position: fixed;
   right: 20px;
@@ -114,15 +111,48 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-#mailingListBtn:hover {
-  background: #4739e6;
+#mailingListBtn:hover { background: #4739e6; }
+
+/* Shopping Cart */
+#cartBtn {
+  position: fixed;
+  left: 20px;
+  top: 40%;
+  padding: 12px 20px;
+  background: #ff7b00;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
+#cartBtn:hover { background: #e66a00; }
+
+#cartPopup {
+  display: none;
+  position: fixed;
+  right: 20px;
+  top: 10%;
+  width: 300px;
+  max-height: 70%;
+  overflow-y: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  padding: 20px;
+  z-index: 1001;
+}
+#cartPopup h3 { margin-top:0; }
+.cart-item { display:flex; justify-content: space-between; margin:8px 0; }
+.cart-item button { background:red; color:white; border:none; padding:2px 6px; cursor:pointer; border-radius:4px; }
 </style>
 </head>
 <body>
 
-<!-- Floating Mailing List Button -->
+<!-- Floating Buttons -->
 <button id="mailingListBtn" onclick="openSignup()">Join Our Mailing List</button>
+<button id="cartBtn" onclick="toggleCart()">Cart (0)</button>
 
 <!-- Mailing List Popup -->
 <div id="signupPopup" class="signup-popup">
@@ -141,6 +171,14 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
   </div>
 </div>
 
+<!-- Shopping Cart Popup -->
+<div id="cartPopup">
+  <h3>Shopping Cart</h3>
+  <div id="cartItems"></div>
+  <p id="cartTotal">Total: $0</p>
+</div>
+
+<!-- Header -->
 <header>
 <div class="logo">Modern Fairytale Furnishings</div>
 <nav>
@@ -150,76 +188,41 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 </nav>
 </header>
 
+<!-- Hero -->
 <section class="hero" id="homeHero">
 <h1>Design Your Dream Home</h1>
 <p>Luxury furnishings for every room of your story.</p>
 <button onclick="scrollToCollections()">Browse Collections</button>
 </section>
 
+<!-- Collections -->
 <section class="section" id="collections">
 <h2>Shop By Room</h2>
 <div class="grid">
-<div class="card"><img src="bedroom.jpg"><div class="card-body"><h3>Bedroom</h3><p>Beds, dressers, nightstands and luxury sets.</p><button onclick="showCategory('bedroom')">Browse Bedroom</button></div></div>
-<div class="card"><img src="sofa.jpg"><div class="card-body"><h3>Living Room</h3><p>Sofas, sectionals, recliners and tables.</p><button onclick="showCategory('living')">Browse Living Room</button></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80"><div class="card-body"><h3>Dining Room</h3><p>Dining sets, chairs and elegant tables.</p><button onclick="showCategory('dining')">Browse Dining</button></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80"><div class="card-body"><h3>Home Theater</h3><p>Luxury recliners and media consoles.</p><button onclick="showCategory('theater')">Browse Theater</button></div></div>
+<div class="card"><img src="bedroom.jpg"><div class="card-body"><h3>Bedroom</h3><p>Beds, dressers, nightstands and luxury sets.</p><button onclick="addToCart('Luxury King Bed','$1299')">Add to Cart</button></div></div>
+<div class="card"><img src="sofa.jpg"><div class="card-body"><h3>Living Room</h3><p>Sofas, sectionals, recliners and tables.</p><button onclick="addToCart('Leather Sofa','$999')">Add to Cart</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80"><div class="card-body"><h3>Dining Room</h3><p>Dining sets, chairs and elegant tables.</p><button onclick="addToCart('Dining Table Set','$899')">Add to Cart</button></div></div>
 </div>
 </section>
 
+<!-- Product Section -->
 <section class="section products" id="productSection">
 <button class="back" onclick="showHome()">← Back to Collections</button>
 <h2 id="categoryTitle"></h2>
 <div class="grid" id="productGrid"></div>
 </section>
 
+<!-- Protection Plans -->
 <section class="section" id="protection">
 <h2>Furniture Protection Plans</h2>
 <div class="grid">
-<div class="card">
-<div class="card-body">
-<h3>GOOD</h3>
-<p style="font-size:28px;font-weight:bold;color:#5a4bff">$79</p>
-<ul>
-<li>Wear & Tear</li>
-<li>Broken Frames</li>
-<li>Spring Damage</li>
-<li>Structural Repairs</li>
-</ul>
-<button>Add Protection</button>
-</div>
-</div>
-
-<div class="card" style="border:2px solid #5a4bff">
-<div class="card-body">
-<h3>BETTER</h3>
-<p style="font-size:28px;font-weight:bold;color:#5a4bff">$109</p>
-<ul>
-<li>Everything in GOOD</li>
-<li>Reclining Mechanisms</li>
-<li>Manual Handles</li>
-<li>Mechanical Failures</li>
-</ul>
-<button>Add Protection</button>
-</div>
-</div>
-
-<div class="card">
-<div class="card-body">
-<h3>BEST</h3>
-<p style="font-size:28px;font-weight:bold;color:#5a4bff">$149</p>
-<ul>
-<li>Everything in BETTER</li>
-<li>Power Recliner Motors</li>
-<li>Electrical Components</li>
-<li>Control Panels</li>
-<li>Priority Service</li>
-</ul>
-<button>Add Protection</button>
-</div>
-</div>
+<div class="card"><div class="card-body"><h3>GOOD</h3><p style="font-size:28px;font-weight:bold;color:#5a4bff">$79</p><ul><li>Wear & Tear</li><li>Broken Frames</li><li>Spring Damage</li><li>Structural Repairs</li></ul><button>Add Protection</button></div></div>
+<div class="card" style="border:2px solid #5a4bff"><div class="card-body"><h3>BETTER</h3><p style="font-size:28px;font-weight:bold;color:#5a4bff">$109</p><ul><li>Everything in GOOD</li><li>Reclining Mechanisms</li><li>Manual Handles</li><li>Mechanical Failures</li></ul><button>Add Protection</button></div></div>
+<div class="card"><div class="card-body"><h3>BEST</h3><p style="font-size:28px;font-weight:bold;color:#5a4bff">$149</p><ul><li>Everything in BETTER</li><li>Power Recliner Motors</li><li>Electrical Components</li><li>Control Panels</li><li>Priority Service</li></ul><button>Add Protection</button></div></div>
 </div>
 </section>
 
+<!-- Footer -->
 <footer>
 <p>Modern Fairytale Furnishings</p>
 <p>Email: support@modernfairytalefurnishings.com</p>
@@ -228,36 +231,19 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 </footer>
 
 <script>
+/* Category and Home */
 const products={
-  bedroom:[
-    {name:'Luxury King Bed', price:'$1299', img:'bed186025_main.jpg'},
-    {name:'Modern Nightstand', price:'$199', img:'nightstand.jpg'},
-    {name:'Wood Dresser', price:'$599', img:'dresser.jpg'}
-  ],
-  living:[
-    {name:'Leather Sofa', price:'$999', img:'sofa.jpg'},
-    {name:'Recliner Chair', price:'$499', img:'recliners.jpg'},
-    {name:'Coffee Table', price:'$249', img:'cofeetable.jpg'}
-  ],
-  dining:[
-    {name:'Dining Table Set', price:'$899', img:'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80'},
-    {name:'Dining Chairs', price:'$299', img:'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&w=800&q=80'},
-    {name:'Buffet Cabinet', price:'$699', img:'buffet.jpg'}
-  ],
-  theater:[
-    {name:'Power Recliner', price:'$799', img:'power.jpg'},
-    {name:'Theater Seating Row', price:'$1999', img:'theaterrecl.jpg'},
-    {name:'Media Console', price:'$499', img:'mediaconsole.jpg'}
-  ]
+  bedroom:[{name:'Luxury King Bed',price:'$1299',img:'bed186025_main.jpg'}],
+  living:[{name:'Leather Sofa',price:'$999',img:'sofa.jpg'}],
+  dining:[{name:'Dining Table Set',price:'$899',img:'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80'}],
 };
-
 function showCategory(cat){
   const grid=document.getElementById('productGrid');
   grid.innerHTML='';
   products[cat].forEach(p=>{
     const div=document.createElement('div');
     div.className='card';
-    div.innerHTML=`<img src='${p.img}'><div class='card-body'><h3>${p.name}</h3><p>${p.price}</p><button>Add to Cart</button></div>`;
+    div.innerHTML=`<img src='${p.img}'><div class='card-body'><h3>${p.name}</h3><p>${p.price}</p><button onclick="addToCart('${p.name}','${p.price}')">Add to Cart</button></div>`;
     grid.appendChild(div);
   });
   document.getElementById('categoryTitle').innerText=cat.charAt(0).toUpperCase()+cat.slice(1)+' Furniture';
@@ -265,27 +251,43 @@ function showCategory(cat){
   document.getElementById('collections').style.display='none';
   document.getElementById('homeHero').style.display='none';
 }
-
 function showHome(){
   document.getElementById('productSection').style.display='none';
   document.getElementById('collections').style.display='block';
   document.getElementById('homeHero').style.display='flex';
 }
+function scrollToCollections(){ document.getElementById('collections').scrollIntoView({behavior:'smooth'});}
+function scrollToInsurance(){ document.getElementById('protection').scrollIntoView({behavior:'smooth'});}
 
-function scrollToCollections(){
-  document.getElementById('collections').scrollIntoView({behavior:'smooth'});
-}
+/* Mailing List Popup */
+function openSignup() { document.getElementById("signupPopup").classList.add("show"); }
+function closeSignup() { document.getElementById("signupPopup").classList.remove("show"); }
 
-function scrollToInsurance(){
-  document.getElementById('protection').scrollIntoView({behavior:'smooth'});
+/* Shopping Cart */
+let cart = [];
+function addToCart(name, price){
+  cart.push({name, price});
+  updateCart();
 }
-
-/* Mailing List Button JS */
-function openSignup() {
-  document.getElementById("signupPopup").style.display = "flex";
+function updateCart(){
+  const cartItems = document.getElementById("cartItems");
+  cartItems.innerHTML = '';
+  let total = 0;
+  cart.forEach((item,i)=>{
+    const priceNum = parseFloat(item.price.replace('$',''));
+    total += priceNum;
+    const div = document.createElement('div');
+    div.className='cart-item';
+    div.innerHTML=`${item.name} - ${item.price} <button onclick="removeCartItem(${i})">X</button>`;
+    cartItems.appendChild(div);
+  });
+  document.getElementById("cartTotal").innerText = 'Total: $'+total;
+  document.getElementById("cartBtn").innerText = `Cart (${cart.length})`;
 }
-function closeSignup() {
-  document.getElementById("signupPopup").style.display = "none";
+function removeCartItem(index){ cart.splice(index,1); updateCart(); }
+function toggleCart(){
+  const popup = document.getElementById("cartPopup");
+  popup.style.display = (popup.style.display==='block') ? 'none':'block';
 }
 </script>
 
