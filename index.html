@@ -5,32 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modern Fairytale Furnishings</title>
 <style>
+/* General Styles */
 body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#333}
-<div id="signupPopup" class="signup-popup">
-<div class="signup-box">
 
-<h2>Join Our VIP Mailing List</h2>
-<p>Get exclusive furniture deals, new arrivals, and special discounts.</p>
-
-<input type="text" placeholder="Full Name">
-<input type="email" placeholder="Email Address">
-<input type="text" placeholder="Mailing Address">
-
-<button>Join Mailing List</button>
-
-<span class="close" onclick="closeSignup()">✕</span>
-
-</div>
-</div>  
+/* Header */
 header{background:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);position:sticky;top:0;z-index:10}
 .logo{font-size:24px;font-weight:bold;color:#5a4bff}
 nav a{margin:0 15px;text-decoration:none;color:#333;font-weight:500;cursor:pointer}
+
+/* Hero */
 .hero{height:500px;background:url('bedroom.jpg') center/cover;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:20px}
 .hero h1{font-size:56px;margin:0;text-shadow:0 5px 20px rgba(0,0,0,0.4)}
 .hero p{font-size:20px;margin:15px 0 25px}
 .hero button{padding:14px 28px;border:none;background:#5a4bff;color:white;font-size:16px;border-radius:8px;cursor:pointer}
+
+/* Sections */
 .section{padding:70px 40px;max-width:1200px;margin:auto}
 .section h2{text-align:center;margin-bottom:40px}
+
+/* Grids & Cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px}
 .card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.08);transition:transform .2s}
 .card:hover{transform:translateY(-5px)}
@@ -40,10 +33,91 @@ nav a{margin:0 15px;text-decoration:none;color:#333;font-weight:500;cursor:point
 .card-body button{margin-top:10px;padding:10px 16px;border:none;background:#5a4bff;color:white;border-radius:6px;cursor:pointer}
 .products{display:none}
 .back{margin-bottom:20px;background:#5a4bff;color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer}
+
+/* Footer */
 footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-top:40px}
+
+/* Protection Section Styling */
+#protection .card button{width:100%}
+#protection .card h3{margin-bottom:5px}
+
+/* Mailing List Popup */
+.signup-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex; /* visible on page load */
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.signup-box {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.signup-box h2 {
+  margin-top: 0;
+  color: #5a4bff;
+}
+
+.signup-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.signup-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #5a4bff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.signup-box button:hover {
+  background: #4739e6;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
 </style>
 </head>
 <body>
+
+<!-- Mailing List Popup -->
+<div id="signupPopup" class="signup-popup">
+  <div class="signup-box">
+    <h2>Join Our VIP Mailing List</h2>
+    <p>Get exclusive furniture deals, new arrivals, and special discounts.</p>
+    <input type="text" placeholder="Full Name">
+    <input type="email" placeholder="Email Address">
+    <input type="text" placeholder="Mailing Address">
+    <button>Join Mailing List</button>
+    <span class="close" onclick="closeSignup()">✕</span>
+  </div>
+</div>
+
 <header>
 <div class="logo">Modern Fairytale Furnishings</div>
 <nav>
@@ -52,11 +126,13 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 <a onclick="scrollToInsurance()">Protection Plans</a>
 </nav>
 </header>
+
 <section class="hero" id="homeHero">
 <h1>Design Your Dream Home</h1>
 <p>Luxury furnishings for every room of your story.</p>
 <button onclick="scrollToCollections()">Browse Collections</button>
 </section>
+
 <section class="section" id="collections">
 <h2>Shop By Room</h2>
 <div class="grid">
@@ -66,11 +142,13 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 <div class="card"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80"><div class="card-body"><h3>Home Theater</h3><p>Luxury recliners and media consoles.</p><button onclick="showCategory('theater')">Browse Theater</button></div></div>
 </div>
 </section>
+
 <section class="section products" id="productSection">
 <button class="back" onclick="showHome()">← Back to Collections</button>
 <h2 id="categoryTitle"></h2>
 <div class="grid" id="productGrid"></div>
 </section>
+
 <section class="section" id="protection">
 <h2>Furniture Protection Plans</h2>
 <div class="grid">
@@ -118,12 +196,14 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 </div>
 </div>
 </section>
+
 <footer>
 <p>Modern Fairytale Furnishings</p>
 <p>Email: support@modernfairytalefurnishings.com</p>
 <p>Phone: (800) 555-FURN</p>
 <p>© 2026 Modern Fairytale Furnishings</p>
 </footer>
+
 <script>
 const products={
   bedroom:[
@@ -176,6 +256,14 @@ function scrollToCollections(){
 function scrollToInsurance(){
   document.getElementById('protection').scrollIntoView({behavior:'smooth'});
 }
+
+/* Popup JS */
+function closeSignup() {
+  document.getElementById("signupPopup").style.display = "none";
+}
+window.onload = function() {
+  document.getElementById("signupPopup").style.display = "flex";
+};
 </script>
 </body>
 </html>
