@@ -32,6 +32,7 @@ nav a{margin:0 15px;text-decoration:none;color:#333;font-weight:500;cursor:point
 
 footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-top:40px}
 
+/* Mailing List Popup */
 .signup-popup {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:999;opacity:0;transition:opacity .4s ease;}
 .signup-popup.show {display:flex;opacity:1;}
 .signup-box {background:white;padding:40px;border-radius:12px;width:350px;text-align:center;box-shadow:0 15px 40px rgba(0,0,0,0.3);position:relative;}
@@ -41,12 +42,11 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 .signup-box button:hover {background:#4739e6;}
 .close {position:absolute;top:10px;right:15px;cursor:pointer;font-size:18px;}
 
+/* Floating Buttons */
 #mailingListBtn {position:fixed;right:20px;top:40%;padding:12px 20px;background:#5a4bff;color:white;border:none;border-radius:6px;cursor:pointer;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.2);}
 #mailingListBtn:hover {background:#4739e6;}
-
 #cartBtn {position:fixed;left:20px;top:40%;padding:12px 20px;background:#ff7b00;color:white;border:none;border-radius:6px;cursor:pointer;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.2);}
 #cartBtn:hover {background:#e66a00;}
-
 #cartPopup {display:none;position:fixed;right:20px;top:10%;width:300px;max-height:70%;overflow-y:auto;background:white;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,0.3);padding:20px;z-index:1001;}
 #cartPopup h3 {margin-top:0;}
 .cart-item {display:flex;justify-content:space-between;margin:8px 0;}
@@ -113,12 +113,61 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 <div class="grid" id="productGrid"></div>
 </section>
 
+<!-- Furniture Protection Plans -->
 <section class="section" id="protection">
 <h2>Furniture Protection Plans</h2>
 <div class="grid">
-<div class="card"><div class="card-body"><h3>GOOD</h3><p>$79</p><ul><li>Wear & Tear</li><li>Broken Frames</li><li>Spring Damage</li><li>Structural Repairs</li></ul><button>Add Protection</button></div></div>
-<div class="card" style="border:2px solid #5a4bff"><div class="card-body"><h3>BETTER</h3><p>$109</p><ul><li>Everything in GOOD</li><li>Reclining Mechanisms</li><li>Manual Handles</li><li>Mechanical Failures</li></ul><button>Add Protection</button></div></div>
-<div class="card"><div class="card-body"><h3>BEST</h3><p>$149</p><ul><li>Everything in BETTER</li><li>Power Recliner Motors</li><li>Electrical Components</li><li>Control Panels</li><li>Priority Service</li></ul><button>Add Protection</button></div></div>
+  <div class="card">
+    <div class="card-body">
+      <h3>GOOD</h3>
+      <p>$79</p>
+      <button onclick="toggleDetails('goodDetails')">Details</button>
+      <div id="goodDetails" style="display:none;margin-top:10px;text-align:left;">
+        <ul>
+          <li>Wear & Tear</li>
+          <li>Broken Frames</li>
+          <li>Spring Damage</li>
+          <li>Structural Repairs</li>
+        </ul>
+      </div>
+      <button onclick="addToCart('GOOD Protection','$79')">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card" style="border:2px solid #5a4bff">
+    <div class="card-body">
+      <h3>BETTER</h3>
+      <p>$109</p>
+      <button onclick="toggleDetails('betterDetails')">Details</button>
+      <div id="betterDetails" style="display:none;margin-top:10px;text-align:left;">
+        <ul>
+          <li>Everything in GOOD</li>
+          <li>Reclining Mechanisms</li>
+          <li>Manual Handles</li>
+          <li>Mechanical Failures</li>
+        </ul>
+      </div>
+      <button onclick="addToCart('BETTER Protection','$109')">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h3>BEST</h3>
+      <p>$149</p>
+      <button onclick="toggleDetails('bestDetails')">Details</button>
+      <div id="bestDetails" style="display:none;margin-top:10px;text-align:left;">
+        <ul>
+          <li>Everything in BETTER</li>
+          <li>Power Recliner Motors</li>
+          <li>Electrical Components</li>
+          <li>Control Panels</li>
+          <li>Priority Service</li>
+        </ul>
+      </div>
+      <button onclick="addToCart('BEST Protection','$149')">Add to Cart</button>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -130,6 +179,7 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 </footer>
 
 <script>
+// Products
 const products = {
   bedroom:[
     {name:'Luxury King Bed', price:'$1299', img:'bed186025_main.jpg'},
@@ -148,6 +198,7 @@ const products = {
   ]
 };
 
+// Show Category
 function showCategory(cat){
   const grid = document.getElementById('productGrid');
   grid.innerHTML = '';
@@ -172,11 +223,11 @@ function showHome(){
 function scrollToCollections(){document.getElementById('collections').scrollIntoView({behavior:'smooth'});}
 function scrollToInsurance(){document.getElementById('protection').scrollIntoView({behavior:'smooth'});}
 
-/* Mailing List */
+// Mailing List
 function openSignup(){document.getElementById("signupPopup").classList.add("show");}
 function closeSignup(){document.getElementById("signupPopup").classList.remove("show");}
 
-/* Shopping Cart */
+// Cart
 let cart = [];
 function addToCart(name, price){
   cart.push({name, price});
@@ -202,6 +253,13 @@ function toggleCart(){
   const popup = document.getElementById("cartPopup");
   popup.style.display = (popup.style.display==='block')?'none':'block';
 }
+
+// Insurance Details Toggle
+function toggleDetails(id){
+  const el = document.getElementById(id);
+  el.style.display = (el.style.display==='none') ? 'block' : 'none';
+}
 </script>
+
 </body>
 </html>
