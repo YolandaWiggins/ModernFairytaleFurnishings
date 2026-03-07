@@ -7,79 +7,162 @@
 
 <style>
 
-body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;color:#333}
+body{
+margin:0;
+font-family:Arial;
+background:#f4f6f8;
+color:#333;
+}
 
-header{background:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);position:sticky;top:0;z-index:10}
+header{
+background:white;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+position:sticky;
+top:0;
+z-index:10;
+}
 
-.logo{font-size:24px;font-weight:bold;color:#5a4bff}
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#5a4bff;
+}
 
-nav a{margin:0 15px;text-decoration:none;color:#333;font-weight:500;cursor:pointer}
+nav a{
+margin:0 15px;
+text-decoration:none;
+color:#333;
+font-weight:500;
+cursor:pointer;
+}
 
-.hero{height:500px;background:url('bedroom.jpg') center/cover;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white}
+.hero{
+height:500px;
+background:url('bedroom.jpg') center/cover;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
 
-.hero h1{font-size:56px;margin:0;text-shadow:0 5px 20px rgba(0,0,0,0.4)}
+.hero h1{
+font-size:56px;
+margin:0;
+text-shadow:0 5px 20px rgba(0,0,0,0.4);
+}
 
-.hero button{padding:14px 28px;border:none;background:#5a4bff;color:white;border-radius:8px;cursor:pointer}
+.hero button{
+padding:14px 28px;
+border:none;
+background:#5a4bff;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
 
-.section{padding:70px 40px;max-width:1200px;margin:auto}
+.section{
+padding:70px 40px;
+max-width:1200px;
+margin:auto;
+}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:25px}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:25px;
+}
 
-.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.08);transition:transform .2s}
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:transform .2s;
+}
 
-.card:hover{transform:translateY(-5px)}
+.card:hover{
+transform:translateY(-5px);
+}
 
-.card img{width:100%;height:180px;object-fit:cover}
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
 
-.card-body{padding:20px}
+.card-body{
+padding:20px;
+}
 
-.card-body p{font-weight:bold;color:#5a4bff}
+.card-body button{
+margin-top:10px;
+padding:10px 16px;
+border:none;
+background:#5a4bff;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
 
-.card-body button{margin-top:10px;padding:10px 16px;border:none;background:#5a4bff;color:white;border-radius:6px;cursor:pointer}
+.products{
+display:none;
+}
 
-.products{display:none}
+.back{
+margin-bottom:20px;
+background:#5a4bff;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+}
 
-.back{margin-bottom:20px;background:#5a4bff;color:white;border:none;padding:10px 18px;border-radius:6px;cursor:pointer}
+footer{
+background:#111;
+color:white;
+padding:40px 20px;
+text-align:center;
+margin-top:40px;
+}
 
-footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-top:40px}
+#warrantyPopup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+justify-content:center;
+align-items:center;
+}
 
-#cartBtn{position:fixed;left:20px;top:40%;padding:12px 20px;background:#ff7b00;color:white;border:none;border-radius:6px;cursor:pointer;z-index:1000}
+.warranty-box{
+background:white;
+padding:30px;
+border-radius:10px;
+width:420px;
+}
 
-#cartPopup{display:none;position:fixed;right:20px;top:10%;width:320px;background:white;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,0.3);padding:20px;z-index:1001}
-
-.cart-item{display:flex;justify-content:space-between;margin:6px 0}
-
-.cart-item button{background:red;color:white;border:none;cursor:pointer}
-
-.qty{width:50px;margin-top:5px}
-
-.plan-highlight{border:3px solid #5a4bff;position:relative}
-
-.badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#5a4bff;color:white;padding:4px 10px;font-size:12px;border-radius:6px}
-
-#warrantyPopup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center}
-
-.warranty-box{background:white;padding:30px;border-radius:10px;width:420px}
-
-.formInput{width:100%;padding:10px;margin:6px 0;border-radius:6px;border:1px solid #ccc}
-
-#insuranceOffer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center}
-
-.offer-box{background:white;padding:30px;border-radius:10px;width:350px;text-align:center}
+.formInput{
+width:100%;
+padding:10px;
+margin:6px 0;
+border-radius:6px;
+border:1px solid #ccc;
+}
 
 </style>
 </head>
 
 <body>
-
-<button id="cartBtn" onclick="toggleCart()">Cart (0)</button>
-
-<div id="cartPopup">
-<h3>Shopping Cart</h3>
-<div id="cartItems"></div>
-<p id="cartTotal">Total: $0</p>
-<button onclick="checkout()" style="width:100%;padding:10px;background:#5a4bff;color:white;border:none;border-radius:6px">Checkout</button>
-</div>
 
 <header>
 
@@ -88,7 +171,6 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 <nav>
 <a onclick="showHome()">Home</a>
 <a onclick="scrollToCollections()">Collections</a>
-<a onclick="scrollToInsurance()">Protection Plans</a>
 <a onclick="openWarranty()">Warranty Registration</a>
 </nav>
 
@@ -107,7 +189,6 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 
 <h2>Shop By Room</h2>
 
-<div class="grid">
 <div class="grid">
 
 <div class="card">
@@ -143,11 +224,90 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 </div>
 
 </div>
+</section>
+
+<!-- BEDROOM PRODUCTS -->
+
+<section id="bedroom" class="section products">
+
+<button class="back" onclick="showHome()">Back</button>
+
+<h2>Bedroom Collection</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="bed186025_main.jpg">
+<div class="card-body">
+<h3>Luxury Bed Frame</h3>
+<p>$899</p>
 </div>
 </div>
 
 </div>
+</section>
 
+<!-- LIVING ROOM -->
+
+<section id="living" class="section products">
+
+<button class="back" onclick="showHome()">Back</button>
+
+<h2>Living Room Collection</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="sofa.jpg">
+<div class="card-body">
+<h3>Modern Sofa</h3>
+<p>$799</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- HOME THEATER -->
+
+<section id="theater" class="section products">
+
+<button class="back" onclick="showHome()">Back</button>
+
+<h2>Home Theater Seating</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="recliners.jpg">
+<div class="card-body">
+<h3>Luxury Recliner</h3>
+<p>$699</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- DINING -->
+
+<section id="dining" class="section products">
+
+<button class="back" onclick="showHome()">Back</button>
+
+<h2>Dining Collection</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="buffet.jpg">
+<div class="card-body">
+<h3>Buffet Hutch</h3>
+<p>$599</p>
+</div>
+</div>
+
+</div>
 </section>
 
 <footer>
@@ -156,6 +316,8 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
 <p>Email: support@modernfairytalefurnishings.com</p>
 
 </footer>
+
+<!-- WARRANTY POPUP -->
 
 <div id="warrantyPopup">
 
@@ -183,7 +345,6 @@ oninput="formatPhone(this)">
 <select class="formInput">
 
 <option value="">Select Furniture Type</option>
-
 <option>Bedroom</option>
 <option>Living Room</option>
 <option>Kitchen</option>
@@ -214,6 +375,38 @@ oninput="formatPhone(this)">
 </div>
 
 <script>
+
+function scrollToCollections(){
+document.getElementById("collections").scrollIntoView({behavior:"smooth"})
+}
+
+function showCategory(category){
+
+document.getElementById("homeHero").style.display="none"
+document.getElementById("collections").style.display="none"
+
+document.querySelectorAll(".products").forEach(section=>{
+section.style.display="none"
+})
+
+document.getElementById(category).style.display="block"
+
+window.scrollTo(0,0)
+
+}
+
+function showHome(){
+
+document.getElementById("homeHero").style.display="flex"
+document.getElementById("collections").style.display="block"
+
+document.querySelectorAll(".products").forEach(section=>{
+section.style.display="none"
+})
+
+window.scrollTo(0,0)
+
+}
 
 function openWarranty(){
 document.getElementById("warrantyPopup").style.display="flex"
