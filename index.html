@@ -376,22 +376,30 @@ oninput="formatPhone(this)">
 
 <script>
 
+<script>
+
 function scrollToCollections(){
 document.getElementById("collections").scrollIntoView({behavior:"smooth"})
 }
 
 function showCategory(category){
 
+// hide home sections
 document.getElementById("homeHero").style.display="none"
 document.getElementById("collections").style.display="none"
 
-document.querySelectorAll(".products").forEach(section=>{
+// hide all product sections
+document.querySelectorAll(".products").forEach(function(section){
 section.style.display="none"
 })
 
-document.getElementById(category).style.display="block"
+// show selected room
+let target=document.getElementById(category)
 
+if(target){
+target.style.display="block"
 window.scrollTo(0,0)
+}
 
 }
 
@@ -400,7 +408,8 @@ function showHome(){
 document.getElementById("homeHero").style.display="flex"
 document.getElementById("collections").style.display="block"
 
-document.querySelectorAll(".products").forEach(section=>{
+// hide all room sections
+document.querySelectorAll(".products").forEach(function(section){
 section.style.display="none"
 })
 
@@ -423,27 +432,26 @@ closeWarranty()
 
 function formatPhone(input){
 
-let numbers = input.value.replace(/\D/g,'')
+let numbers=input.value.replace(/\D/g,'')
 
-if(numbers.length > 10){
-numbers = numbers.substring(0,10)
+if(numbers.length>10){
+numbers=numbers.substring(0,10)
 }
 
-let formatted = numbers
+let formatted=numbers
 
-if(numbers.length > 3 && numbers.length <=6){
-formatted = "(" + numbers.substring(0,3) + ")-" + numbers.substring(3)
+if(numbers.length>3 && numbers.length<=6){
+formatted="("+numbers.substring(0,3)+")-"+numbers.substring(3)
 }
 
-else if(numbers.length > 6){
-formatted = "(" + numbers.substring(0,3) + ")-" +
-numbers.substring(3,6) + "-" +
-numbers.substring(6)
+else if(numbers.length>6){
+formatted="("+numbers.substring(0,3)+")-"+numbers.substring(3,6)+"-"+numbers.substring(6)
 }
 
-input.value = formatted
+input.value=formatted
 
 }
+
 
 </script>
 
