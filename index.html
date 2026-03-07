@@ -420,7 +420,28 @@ closeWarranty()
 function closeOffer(){
 document.getElementById("insuranceOffer").style.display="none"
 }
+function formatPhone(input){
 
+let numbers = input.value.replace(/\D/g,'')
+
+if(numbers.length > 10){
+numbers = numbers.substring(0,10)
+}
+
+let formatted = numbers
+
+if(numbers.length > 3 && numbers.length <=6){
+formatted = "(" + numbers.substring(0,3) + ")-" + numbers.substring(3)
+}
+
+else if(numbers.length > 6){
+formatted = "(" + numbers.substring(0,3) + ")-" +
+numbers.substring(3,6) + "-" +
+numbers.substring(6)
+}
+
+input.value = formatted
+}
 </script>
 
 </body>
