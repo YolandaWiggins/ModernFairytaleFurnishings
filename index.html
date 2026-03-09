@@ -129,8 +129,8 @@ footer{background:#111;color:white;padding:40px 20px;text-align:center;margin-to
     <input type="text" id="wModel" placeholder="Furniture Model">
     <input type="text" id="wSerial" placeholder="Serial Number">
     <input type="date" id="wDate" placeholder="Purchase Date">
-    <input type="email" id="wEmail" placeholder="Email Address">
-    <input type="tel" id="wPhone" placeholder="Phone Number">
+    <input type="email" id="wEmail" placeholder="Email Address">    
+    <input type="tel" id="wPhone" placeholder="Phone Number (123-456-7890)" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
     <button onclick="submitWarranty()">Submit Registration</button>
     <span class="close" onclick="closeWarranty()">✕</span>
   </div>
