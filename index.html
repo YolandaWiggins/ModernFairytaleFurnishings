@@ -277,17 +277,31 @@ function closeSignup(){document.getElementById("signupPopup").classList.remove("
 function openWarranty(){document.getElementById("warrantyPopup").classList.add("show");}
 function closeWarranty(){document.getElementById("warrantyPopup").classList.remove("show");}
 function submitWarranty(){
+
+  const phone = document.getElementById('wPhone').value;
+
+  const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
+
+  if(!phonePattern.test(phone)){
+    alert("Please enter phone number in format: 123-456-7890");
+    return;
+  }
+
   const info={
     name:document.getElementById('wName').value,
     model:document.getElementById('wModel').value,
     serial:document.getElementById('wSerial').value,
     date:document.getElementById('wDate').value,
     email:document.getElementById('wEmail').value,
-    phone:document.getElementById('wPhone').value
+    phone:phone
   };
+
   console.log('Warranty Submitted:', info);
+
   alert('Thank you! Your warranty registration has been received.');
+
   closeWarranty();
+
 }
 
 // ===== Cart =====
